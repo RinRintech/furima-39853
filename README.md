@@ -14,12 +14,11 @@
 
 ### Association
 - has_many :items
-- has_one :buy
+- has_many :buys
 
 ## itemsテーブル
 | Column             | Type       | Option                         |
 |--------------------|------------|--------------------------------|
-| id(PK)             | integer    | null: false                    |
 | name               | string     | null: false                    |
 | descritption       | text       | null: false                    |
 | price              | integer    | null: false                    |
