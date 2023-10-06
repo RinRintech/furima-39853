@@ -31,28 +31,32 @@
 
 ### Association
 - belongs_to :user
+- has_one :buy
 
-## buyテーブル
-| Column             | Type    | Option                         |
-|--------------------|---------|--------------------------------|
-| items_id           | integer | null: false, foreign_key: true |
-| users_id           | integer | null: false, foreign_key: true |
+## buysテーブル
+| Column             | Type       | Option                         |
+|--------------------|------------|--------------------------------|
+| items              | references | null: false, foreign_key: true |
+| users              | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :items
+- belongs_to :item
+- has_many :users
 
 
-## deliveryテーブル
-| Column             | Type    | Option                         |
-|--------------------|---------|--------------------------------|
-| buy_id             | integer | null: false, foreign_key: true |
-| postal_code        | string  | null: false                    |
-| prefecture_id      | string  | null: false                    |
-| add_city           | string  | null: false                    |
-| add_street         | string  | null: false                    |
-| add_block          | integer | null: false                    |
-| add_building       | string  |                                |
-| tel                | string  | null: false                    |
+
+
+## deliveriesテーブル
+| Column             | Type       | Option                         |
+|--------------------|------------|--------------------------------|
+| buys               | references | null: false, foreign_key: true |
+| postal_code        | string     | null: false                    |
+| prefecture_id      | string     | null: false                    |
+| city_id            | string     | null: false                    |
+| street_id          | string     | null: false                    |
+| block_id           | string     | null: false                    |
+| building_id        | string     |                                |
+| tel                | string     | null: false                    |
 
 ### Association
 - belongs_to :buy
