@@ -36,13 +36,7 @@
 | Column             | Type    | Option                         |
 |--------------------|---------|--------------------------------|
 | items_id           | integer | null: false, foreign_key: true |
-| payment            | string  | null: false                    |
-| delivery_id        | integer | null: false, foreign_key: true |
-| shipping_fee       | integer | null: false                    |
-| status             | string  | null: false                    |
-| carrier            | string  | null: false                    |
-| tracking_number    | integer |                                |
-| notes              | text    |                                |
+| users_id           | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :items
@@ -51,14 +45,14 @@
 ## deliveryテーブル
 | Column             | Type    | Option                         |
 |--------------------|---------|--------------------------------|
-| user_id            | integer | null: false, foreign_key: true |
-| postal_code        | integer | null: false                    |
-| add_pref           | string  | null: false                    |
+| buy_id             | integer | null: false, foreign_key: true |
+| postal_code        | string  | null: false                    |
+| prefecture_id      | string  | null: false                    |
 | add_city           | string  | null: false                    |
 | add_street         | string  | null: false                    |
 | add_block          | integer | null: false                    |
 | add_building       | string  |                                |
-| tel                | integer | null: false                    |
+| tel                | string  | null: false                    |
 
 ### Association
 - belongs_to :buy
