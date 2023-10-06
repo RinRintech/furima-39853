@@ -14,6 +14,7 @@
 
 ### Association
 - has_many :items
+- has_one :buy
 
 ## itemsテーブル
 | Column             | Type       | Option                         |
@@ -36,26 +37,24 @@
 ## buysテーブル
 | Column             | Type       | Option                         |
 |--------------------|------------|--------------------------------|
-| items              | references | null: false, foreign_key: true |
-| users              | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :item
-- has_many :users
-
-
-
+- belongs_to :user
+- has_one :delivery
 
 ## deliveriesテーブル
 | Column             | Type       | Option                         |
 |--------------------|------------|--------------------------------|
-| buys               | references | null: false, foreign_key: true |
+| buy                | references | null: false, foreign_key: true |
 | postal_code        | string     | null: false                    |
-| prefecture_id      | string     | null: false                    |
-| city_id            | string     | null: false                    |
-| street_id          | string     | null: false                    |
-| block_id           | string     | null: false                    |
-| building_id        | string     |                                |
+| prefecture_id      | integer    | null: false                    |
+| city               | string     | null: false                    |
+| street             | string     | null: false                    |
+| block              | string     | null: false                    |
+| building           | string     |                                |
 | tel                | string     | null: false                    |
 
 ### Association
