@@ -6,11 +6,14 @@ class BuysController < ApplicationController
 
   def create
     @buy_delibvery = BuyDelivery.new(buy_params)
+    item_id = params[:item_id]
+    @item = Item.find(item_id)
     if @buy_delibvery.valid?
       @buy_delibvery.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render 'index', status: :unprocessable_entity
+      #render partial: 'shared/_error_messages', locals: { buy_delibvery: 'buy_deliverty' }
     end
   end
     
@@ -22,6 +25,6 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.require(:buy_delibvery).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(buy_id: current_buy.id)
+    params.require(:buy_delivery).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(user_id: current_user.id,item_id: params[:item_id])
   end
 end
