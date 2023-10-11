@@ -17,6 +17,9 @@ RSpec.describe BuyDelivery, type: :model do
         @buy_delivery.building = ''
         expect(@buy_delivery).to be_valid
       end
+      it "priceとtokenがあれば保存ができること" do
+        expect(@buy_delivery).to be_valid
+      end
     end
 
       context '内容に問題がある場合' do
@@ -56,6 +59,11 @@ RSpec.describe BuyDelivery, type: :model do
           @buy_delivery.phone_number = '1234abcd567'
           @buy_delivery.valid?
           expect(@buy_delivery.errors.full_messages).to include("Phone number should be 10 to 11 digits long and contain only half-width numbers")
+        end
+        it "tokenが空では登録できないこと" do
+          @buy_delivery.token = nil
+          @buy_delivery.valid?
+          expect(@buy_delivery.errors.full_messages).to include("Token can't be blank")
         end
       end
     end

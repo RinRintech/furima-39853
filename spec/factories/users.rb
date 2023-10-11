@@ -8,5 +8,6 @@ FactoryBot.define do
     first_name_kana { 'アオ' }
     date_of_birth { '1994-10-08' }
     password { 'abcd1234' }
+    
   end
 end
