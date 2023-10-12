@@ -53,9 +53,17 @@ RSpec.describe BuyDelivery, type: :model do
           @buy_delivery.valid?
           expect(@buy_delivery.errors.full_messages).to include("Phone number can't be blank")
         end
-        it 'phone_numberは、10桁以上11桁以内の半角数値のみ保存可能なこと' do
-          @buy_delivery.phone_number = '1234567890'
-          @buy_delivery.phone_number = '12345678901'
+        it 'phone_numberは、10桁以上11桁以内の半角数値のみ保存可能なこと1' do
+          @buy_delivery.phone_number = '1234567890000000'
+          @buy_delivery.valid?
+          expect(@buy_delivery.errors.full_messages).to include("Phone number should be 10 to 11 digits long and contain only half-width numbers")
+        end
+        it 'phone_numberは、10桁以上11桁以内の半角数値のみ保存可能なこと2' do
+          @buy_delivery.phone_number = '12345'
+          @buy_delivery.valid?
+          expect(@buy_delivery.errors.full_messages).to include("Phone number should be 10 to 11 digits long and contain only half-width numbers")
+        end
+        it 'phone_numberは、10桁以上11桁以内の半角数値のみ保存可能なこと3' do
           @buy_delivery.phone_number = '1234abcd567'
           @buy_delivery.valid?
           expect(@buy_delivery.errors.full_messages).to include("Phone number should be 10 to 11 digits long and contain only half-width numbers")
@@ -64,6 +72,16 @@ RSpec.describe BuyDelivery, type: :model do
           @buy_delivery.token = nil
           @buy_delivery.valid?
           expect(@buy_delivery.errors.full_messages).to include("Token can't be blank")
+        end
+        it "user_idが空では登録できないこと" do
+          @buy_delivery.user_id = ' '
+          @buy_delivery.valid?
+          expect(@buy_delivery.errors.full_messages).to include("User can't be blank")
+        end
+        it "item_idが空では登録できないこと" do
+          @buy_delivery.item_id = ' '
+          @buy_delivery.valid?
+          expect(@buy_delivery.errors.full_messages).to include("Item can't be blank")
         end
       end
     end

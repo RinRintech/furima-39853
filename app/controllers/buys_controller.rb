@@ -1,11 +1,10 @@
 class BuysController < ApplicationController
   before_action :set_public_key, only: [:index, :create]
   before_action :authenticate_user!, only: [:show, :index]
+  before_action :find_item
 
   def create
     @buy_delibvery = BuyDelivery.new(buy_params)
-    item_id = params[:item_id]
-    @item = Item.find(item_id)
     @price = @item.price
     if @buy_delibvery.valid?
       pay_item
@@ -19,7 +18,6 @@ class BuysController < ApplicationController
   end
     
     def index
-      @item = Item.find(params[:item_id])
       @buy_delibvery = BuyDelivery.new  
       if current_user.id == @item.user.id
         redirect_to root_path
@@ -48,4 +46,11 @@ class BuysController < ApplicationController
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 
+  def find_item
+    item_id = params[:item_id]
+    @item = Item.find(item_id)
+    @item = Item.find(params[:item_id])
+  end
+
+  
 end
