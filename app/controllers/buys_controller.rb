@@ -1,6 +1,4 @@
 class BuysController < ApplicationController
-  before_action :set_public_key, only: [:index, :create]
-
   def new
     @buy = Buy.new
     @buy_delibvery = BuyDelivery.new
@@ -16,7 +14,6 @@ class BuysController < ApplicationController
       @buy_delibvery.save
       redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render 'index', status: :unprocessable_entity
       #render partial: 'shared/_error_messages', locals: { buy_delibvery: 'buy_deliverty' }
     end
@@ -34,16 +31,11 @@ class BuysController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = "sk_test_d36f11eaed3773f16458a5fe"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
       amount: @price,  # 商品の値段
       card: buy_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
-
-  def set_public_key
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-  end
-
 end
