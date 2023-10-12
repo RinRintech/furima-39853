@@ -19,10 +19,6 @@ default: &default
 
 development:
   <<: *default
-  adapter: mysql2
-  username: root
-  password:
-  host: localhost
   database: furima_originalapps_support_development
 
 # Warning: The database defined as "test" will be erased and
@@ -30,10 +26,6 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  adapter: mysql2
-  username: root
-  password:
-  host: localhost
   database: furima_originalapps_support_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -58,8 +50,6 @@ test:
 #
 production:
   <<: *default
-  adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
   database: furima_originalapps_support_production
   username: furima_originalapps_support
   password: <%= ENV["FURIMA_ORIGINALAPPS_SUPPORT_DATABASE_PASSWORD"] %>
