@@ -1,10 +1,6 @@
 class BuysController < ApplicationController
   before_action :set_public_key, only: [:index, :create]
-
-  def new
-    @buy = Buy.new
-    @buy_delibvery = BuyDelivery.new
-  end
+  before_action :authenticate_user!, only: [:show, :index]
 
   def create
     @buy_delibvery = BuyDelivery.new(buy_params)
@@ -25,6 +21,12 @@ class BuysController < ApplicationController
     def index
       @item = Item.find(params[:item_id])
       @buy_delibvery = BuyDelivery.new  
+      if current_user.id == @item.user.id
+        redirect_to root_path
+      end
+      if @item.buy.present?
+        redirect_to root_path
+      end
     end
   
   private
