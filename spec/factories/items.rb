@@ -10,6 +10,7 @@ FactoryBot.define do
     shipping_date_id { 1 }
     association :user
 
+
     after(:build) {|item| item.image.attach(io: File.open('spec/fixtures/sample.png'), filename: 'sample.png', content_type: 'image/png')}
 
     trait :sold_out do
