@@ -4,7 +4,7 @@ class BuyDelivery
   
 
   with_options presence: true do
-    validates :postal_code, :prefecture_id, :city, :addresses, :token, :user_id ,:item_id
+    validates :prefecture_id, :city, :addresses, :token, :user_id ,:item_id
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'should be 10 to 11 digits long and contain only half-width numbers' }
   end
